@@ -6,11 +6,12 @@ Advent of Code (AoC) is an annual programming challenge event that takes place i
 For more information about Advent of Code, explore the official website: [Advent of Code](https://adventofcode.com/)
 
 # Structure
-Each year has it's own folder of solutions.
+Each year has its own folder of solutions.
 Each day's solution is contained in its own folder. The folder for each day typically includes:
 - The puzzle input provided by Advent of Code for that day (txt file).
 - My solution to the day's puzzle, usually implemented in a Jupyter Notebook (ipynb file).
 
 # How to View Solutions
 1. Navigate to the folder for the specific puzzle you're looking to view.
-2. Open the file called Day{dayNumber}Code.ipynb. That's it! All cells should already have been run and should automatically show output
+2. Open the file called Day{dayNumber}Code.ipynb.
+3. That's it! All cells should already have been run and should automatically show output!
