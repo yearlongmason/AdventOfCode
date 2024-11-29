@@ -1,5 +1,5 @@
 # AdventOfCode
-This repository contains my solutions to Advent of Code programming puzzles from each year. Advent of Code is an annual coding challenge that runs from December 1st to December 25th, where each day a new puzzle is released. The puzzles are designed to be solved with any programming language, and they progressively increase in difficulty throughout the month.
+This repository contains my solutions to Advent of Code programming puzzles from each year!
 
 # What is Advent of Code?
 Advent of Code (AoC) is an annual programming challenge event that takes place in December, containing a series of daily programming puzzles. The puzzles (much like an advent calendar) are released each day from December 1st to December 25th, and each year follows a saving Christmas storyline! It's sort of like LeetCode but a lot more fun!! The puzzles generally start out at an easier difficulty and progressively get more challenging as the month goes on. The puzzles are also designed to be language-agnostic, meaning you can use any programming language to solve them.
