@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 func getInput(fileName string) string {
@@ -15,6 +16,12 @@ func getInput(fileName string) string {
 	return string(fileContents)
 }
 
+func part1() {
+	instructions := getInput("SantaInstructions.txt")
+	finalFloor := strings.Count(instructions, "(") - strings.Count(instructions, ")")
+	fmt.Printf("The instructions take Santa to floor %d", finalFloor)
+}
+
 func main() {
-	fmt.Println(getInput("SantaInstructions.txt"))
+	part1()
 }
