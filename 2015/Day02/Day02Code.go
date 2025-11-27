@@ -55,15 +55,14 @@ func parseInput() []Box {
 
 func findSmallestSide(box Box) int {
 	// Return the smallest side of a box
-	side1 := box.length * box.width
-	side2 := box.width * box.height
-	side3 := box.height * box.length
-	if side1 < side2 && side1 < side3 {
-		return side1
-	} else if side2 < side3 {
-		return side2
+	smallestSide := box.length * box.width
+	if box.width*box.height < smallestSide {
+		smallestSide = box.width * box.height
 	}
-	return side3
+	if box.height*box.length < smallestSide {
+		smallestSide = box.height * box.length
+	}
+	return smallestSide
 }
 
 func part1() {
