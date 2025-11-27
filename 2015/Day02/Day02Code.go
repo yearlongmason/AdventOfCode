@@ -24,8 +24,15 @@ func getInput(fileName string) string {
 func convertStringSliceToInt(stringSlice []string) []int {
 	// Convert slice of strings into slice of ints
 	intSlice := make([]int, 0)
+
+	// Cast each element in the slice as an int and add to intSlice
 	for _, element := range stringSlice {
-		currentVal, _ := strconv.Atoi(element)
+		currentVal, err := strconv.Atoi(element)
+		// Sometimes casting as int doesn't work because of '\n' at the end
+		// If that happens, try again but without the last character
+		if err != nil {
+			currentVal, err = strconv.Atoi(element[0 : len(element)-1])
+		}
 		intSlice = append(intSlice, currentVal)
 	}
 	return intSlice
@@ -33,11 +40,10 @@ func convertStringSliceToInt(stringSlice []string) []int {
 
 func parseInput() []Box {
 	// Parse input as a slice of boxes
-	boxes := getInput("boxSizes.txt")
 	allBoxes := make([]Box, 0)
 
-	// Loop through each line (each individual box)
-	for _, line := range strings.Split(boxes, "\n") {
+	// Loop through each line of the input (each individual box)
+	for _, line := range strings.Split(getInput("boxSizes.txt"), "\n") {
 		// Add box to slice of all boxes
 		currentBox := convertStringSliceToInt(strings.Split(line, "x"))
 		allBoxes = append(allBoxes, Box{length: currentBox[0],
