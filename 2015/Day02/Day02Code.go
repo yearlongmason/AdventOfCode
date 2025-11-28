@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -53,18 +54,6 @@ func parseInput() []Box {
 	return allBoxes
 }
 
-func findSmallestSide(box Box) int {
-	// Return the smallest side of a box
-	smallestSide := box.length * box.width
-	if box.width*box.height < smallestSide {
-		smallestSide = box.width * box.height
-	}
-	if box.height*box.length < smallestSide {
-		smallestSide = box.height * box.length
-	}
-	return smallestSide
-}
-
 func part1() {
 	totalWrappingPaper := 0
 	// Loop through each box
@@ -73,12 +62,30 @@ func part1() {
 		totalWrappingPaper += 2 * box.length * box.width
 		totalWrappingPaper += 2 * box.width * box.height
 		totalWrappingPaper += 2 * box.height * box.length
-		totalWrappingPaper += findSmallestSide(box)
+		totalWrappingPaper += slices.Min([]int{box.length * box.width,
+			box.width * box.height,
+			box.height * box.length})
 	}
 
 	fmt.Printf("Total square feet of wrapping paper needed: %d\n", totalWrappingPaper)
 }
 
+/*func getRibbonForBox(box Box) int {
+	ribbonLength := 0
+	max([]int{box.length, box.width, box.height})
+	return 0
+}*/
+
+func part2() {
+	totalRibbon := 0
+
+	for _, box := range parseInput() {
+		fmt.Println(box)
+	}
+	fmt.Printf("Total feet of ribbon needed: %d\n", totalRibbon)
+}
+
 func main() {
 	part1()
+	//part2()
 }
