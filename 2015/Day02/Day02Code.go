@@ -23,7 +23,7 @@ func getInput(fileName string) string {
 }
 
 func convertStringSliceToInt(stringSlice []string) []int {
-	// Convert slice of strings into slice of ints
+	// Helper function that convert slice of strings into slice of ints
 	intSlice := make([]int, 0)
 
 	// Cast each element in the slice as an int and add to intSlice
@@ -70,22 +70,30 @@ func part1() {
 	fmt.Printf("Total square feet of wrapping paper needed: %d\n", totalWrappingPaper)
 }
 
-/*func getRibbonForBox(box Box) int {
+func getRibbonLength(box Box) int {
 	ribbonLength := 0
-	max([]int{box.length, box.width, box.height})
-	return 0
-}*/
+
+	// Getting perimeter of two smallest sides by getting all sides and subtracting biggest side
+	ribbonLength += box.length * 2
+	ribbonLength += box.height * 2
+	ribbonLength += box.width * 2
+	ribbonLength -= slices.Max([]int{box.length, box.width, box.height}) * 2
+
+	// Don't forget the bow!
+	ribbonLength += box.length * box.height * box.width
+	return ribbonLength
+}
 
 func part2() {
 	totalRibbon := 0
 
 	for _, box := range parseInput() {
-		fmt.Println(box)
+		totalRibbon += getRibbonLength(box)
 	}
 	fmt.Printf("Total feet of ribbon needed: %d\n", totalRibbon)
 }
 
 func main() {
 	part1()
-	//part2()
+	part2()
 }
