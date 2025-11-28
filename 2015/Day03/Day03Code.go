@@ -15,9 +15,9 @@ func getInput(fileName string) string {
 	return string(input)
 }
 
-func moveSanta(character string, x *int, y *int) {
+func moveSanta(direction string, x *int, y *int) {
 	// Moves x and y coordinates (pass by reference)
-	switch character {
+	switch direction {
 	case ">":
 		*x++
 	case "<":
@@ -30,15 +30,36 @@ func moveSanta(character string, x *int, y *int) {
 }
 
 func part1() {
-	// Use a map to keep track of visited coords for speed
+	// Use a map to keep track of visited coords
 	x, y := 0, 0
 	visitedCoords := make(map[string]bool)
 	visitedCoords["0,0"] = true
 
-	for _, character := range getInput("santaDirections.txt") {
+	for _, direction := range getInput("santaDirections.txt") {
 		// Move Santa and add new coordinates to map
-		moveSanta(string(character), &x, &y)
+		moveSanta(string(direction), &x, &y)
 		visitedCoords[strconv.Itoa(x)+","+strconv.Itoa(y)] = true
+	}
+
+	fmt.Printf("Number of houses visited at least once: %d\n", len(visitedCoords))
+}
+
+func part2() {
+	// Use a map to keep track of visited coords
+	x, y := 0, 0
+	roboX, roboY := 0, 0
+	visitedCoords := make(map[string]bool)
+	visitedCoords["0,0"] = true
+
+	for index, direction := range getInput("santaDirections.txt") {
+		// Move Santa (or Robo-Santa) and add new coordinates to map
+		if index%2 == 0 {
+			moveSanta(string(direction), &x, &y)
+			visitedCoords[strconv.Itoa(x)+","+strconv.Itoa(y)] = true
+		} else {
+			moveSanta(string(direction), &roboX, &roboY)
+			visitedCoords[strconv.Itoa(roboX)+","+strconv.Itoa(roboY)] = true
+		}
 	}
 
 	fmt.Printf("Number of houses visited at least once: %d\n", len(visitedCoords))
@@ -46,4 +67,5 @@ func part1() {
 
 func main() {
 	part1()
+	part2()
 }
