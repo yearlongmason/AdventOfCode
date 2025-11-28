@@ -73,7 +73,7 @@ func part1() {
 func getRibbonLength(box Box) int {
 	ribbonLength := 0
 
-	// Getting perimeter of two smallest sides by getting all sides and subtracting biggest side
+	// Getting perimeter of two smallest sides by adding all sides and subtracting biggest side
 	ribbonLength += box.length * 2
 	ribbonLength += box.height * 2
 	ribbonLength += box.width * 2
