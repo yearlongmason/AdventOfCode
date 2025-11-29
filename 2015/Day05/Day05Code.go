@@ -73,6 +73,41 @@ func part1() {
 	fmt.Printf("Number of nice strings: %d\n", numberOfNiceStrings)
 }
 
+func containsRepeatingPair(str string) bool {
+	// TODO impliment this function
+	return false
+}
+
+func containsDoubleLetterWithSeparation(str string) bool {
+	// TODO impliment this function
+	return false
+}
+
+func isNiceNewModel(str string) bool {
+	if !containsRepeatingPair(str) {
+		return false
+	}
+	if !containsDoubleLetterWithSeparation(str) {
+		return false
+	}
+	return true
+}
+
+func part2() {
+	stringsList := getInput("naughtyNice.txt")
+	numberOfNiceStrings := 0
+
+	// Loop through each string and if it's nice add 1 to the nice strings
+	for str := range strings.SplitSeq(stringsList, "\n") {
+		if isNiceNewModel(str) {
+			numberOfNiceStrings++
+		}
+	}
+
+	fmt.Printf("Number of nice strings under new model: %d\n", numberOfNiceStrings)
+}
+
 func main() {
 	part1()
+	part2()
 }
