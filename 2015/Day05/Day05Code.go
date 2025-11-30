@@ -17,11 +17,10 @@ func getInput(fileName string) string {
 
 func getNumVowels(str string) int {
 	// Returns the number of vowels in a string
-	numVowels := strings.Count(str, "a")
-	numVowels += strings.Count(str, "e")
-	numVowels += strings.Count(str, "i")
-	numVowels += strings.Count(str, "o")
-	numVowels += strings.Count(str, "u")
+	numVowels := 0
+	for _, vowel := range []string{"a", "e", "i", "o", "u"} {
+		numVowels += strings.Count(str, vowel)
+	}
 	return numVowels
 }
 
