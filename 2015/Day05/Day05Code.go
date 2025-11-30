@@ -16,6 +16,7 @@ func getInput(fileName string) string {
 }
 
 func getNumVowels(str string) int {
+	// Returns the number of vowels in a string
 	numVowels := strings.Count(str, "a")
 	numVowels += strings.Count(str, "e")
 	numVowels += strings.Count(str, "i")
@@ -46,6 +47,7 @@ func containsIllegalString(str string) bool {
 }
 
 func isNice(str string) bool {
+	// Determines is a string is nice or not
 	if getNumVowels(str) < 3 {
 		return false
 	}
@@ -74,16 +76,28 @@ func part1() {
 }
 
 func containsRepeatingPair(str string) bool {
-	// TODO impliment this function
+	// Looks for a pair that occurs more than once
+	for i := 0; i < len(str)-1; i++ {
+		pair := string(str[i]) + string(str[i+1])
+		if strings.Count(str, pair) > 1 {
+			return true
+		}
+	}
 	return false
 }
 
 func containsDoubleLetterWithSeparation(str string) bool {
-	// TODO impliment this function
+	// Looks for a double letter with a letter in the middle
+	for i := 0; i < len(str)-2; i++ {
+		if str[i] == str[i+2] {
+			return true
+		}
+	}
 	return false
 }
 
 func isNiceNewModel(str string) bool {
+	// Determines is a string is nice or not given the new model
 	if !containsRepeatingPair(str) {
 		return false
 	}
