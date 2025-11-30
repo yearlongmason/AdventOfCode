@@ -44,7 +44,7 @@ func parseInput() []Box {
 	allBoxes := make([]Box, 0)
 
 	// Loop through each line of the input (each individual box)
-	for _, line := range strings.Split(getInput("boxSizes.txt"), "\n") {
+	for line := range strings.SplitSeq(getInput("boxSizes.txt"), "\n") {
 		// Add box to slice of all boxes
 		currentBox := convertStringSliceToInt(strings.Split(line, "x"))
 		allBoxes = append(allBoxes, Box{length: currentBox[0],
