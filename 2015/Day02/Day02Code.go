@@ -28,14 +28,10 @@ func convertStringSliceToInt(stringSlice []string) []int {
 
 	// Cast each element in the slice as an int and add to intSlice
 	for _, element := range stringSlice {
-		currentVal, err := strconv.Atoi(element)
-		// Sometimes casting as int doesn't work because of '\n' at the end
-		// If that happens, try again but without the last character
-		if err != nil {
-			currentVal, err = strconv.Atoi(element[0 : len(element)-1])
-		}
+		currentVal, _ := strconv.Atoi(strings.TrimSpace(element))
 		intSlice = append(intSlice, currentVal)
 	}
+
 	return intSlice
 }
 
