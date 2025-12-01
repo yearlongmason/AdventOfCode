@@ -42,7 +42,7 @@ func part1() {
 	dial := 50
 	// Loop through each rotation
 	for _, rotations := range getRotations() {
-		// Move the dial and account for overflow/underflow
+		// Move the dial and account for overflow or underflow
 		dial += rotations
 		dial %= 100
 		if dial == 0 {
@@ -65,7 +65,32 @@ func getInstructions() []Instruction {
 }
 
 func part2() {
+	numZeros := 0
+	dial := 50
+	// Loop through each instruction
+	for _, instruction := range getInstructions() {
+		// Account for full rotations to save time
+		numZeros += instruction.rotations / 100
+		instruction.rotations %= 100
 
+		// Move dial for each remaining click
+		for i := 0; i < instruction.rotations; i++ {
+			switch instruction.direction {
+			case "R":
+				dial++
+			case "L":
+				dial--
+			}
+
+			// Reset dial in case of overflow or underflow and check for a hit
+			dial %= 100
+			if dial == 0 {
+				numZeros++
+			}
+		}
+	}
+
+	fmt.Printf("Number of times the dial hits 0: %d\n", numZeros)
 }
 
 func main() {
