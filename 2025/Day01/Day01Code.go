@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Instruction struct {
@@ -53,6 +54,24 @@ func part1() {
 	fmt.Printf("Number of times the dial lands on 0: %d\n", numZeros)
 }
 
+func getInstructions() []Instruction {
+	// Create a slice of Instructions from the input file
+	instructions := make([]Instruction, 0)
+	for currentInstruction := range strings.SplitSeq(getInput("instructions.txt"), "\n") {
+		direction := string(currentInstruction[0])
+		rotations, _ := strconv.Atoi(strings.TrimSpace(currentInstruction[1:]))
+		instructions = append(instructions, Instruction{direction: direction, rotations: rotations})
+	}
+	return instructions
+}
+
+func part2() {
+
+}
+
 func main() {
+	start := time.Now()
 	part1()
+	part2()
+	fmt.Printf("Runtime: %f seconds", time.Since(start).Seconds())
 }
