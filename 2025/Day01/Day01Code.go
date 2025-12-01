@@ -5,7 +5,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 )
 
 type Instruction struct {
@@ -70,8 +69,6 @@ func part2() {
 }
 
 func main() {
-	start := time.Now()
 	part1()
 	part2()
-	fmt.Printf("Runtime: %f seconds", time.Since(start).Seconds())
 }
