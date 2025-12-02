@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -49,6 +50,41 @@ func part1() {
 	fmt.Printf("Sum of all invalid IDs: %d\n", invalidIDSum)
 }
 
+func isInvalidIDP2(ID string) bool {
+	// Original regular expression: `\b(\d+)\1{1,len(ID)}\b`
+	// Unfortunately Go uses the RE2 regular expression engine which does not support backreferences (\1)
+	for chunkSize := 1; chunkSize < len(ID); chunkSize++ {
+		// Make sure the ID is actually divisible by the chunk size
+		if len(ID)%chunkSize != 0 {
+			continue
+		}
+
+		// Create a pattern that matches the first {chunkSize} characters n times to fill the string
+		pattern := `(` + ID[:chunkSize] + `){` + strconv.Itoa(len(ID)/chunkSize) + `}`
+		match, _ := regexp.MatchString(pattern, ID)
+		if match {
+			return true
+		}
+	}
+
+	return false
+}
+
+func part2() {
+	invalidIDSum := 0
+	for _, currentRange := range parseInput() {
+		// Loop through each possible ID
+		for ID := currentRange.lowerBound; ID <= currentRange.upperBound; ID++ {
+			if isInvalidIDP2(strconv.Itoa(ID)) {
+				invalidIDSum += ID
+			}
+		}
+	}
+
+	fmt.Printf("Sum of all invalid IDs: %d\n", invalidIDSum)
+}
+
 func main() {
 	part1()
+	part2()
 }
