@@ -12,6 +12,8 @@ type IDRange struct {
 	lowerBound, upperBound int
 }
 
+type isInvalidFunction func(string) bool
+
 func getInput(fileName string) string {
 	input, err := os.ReadFile(fileName)
 	if err != nil {
@@ -22,6 +24,7 @@ func getInput(fileName string) string {
 }
 
 func parseInput() []IDRange {
+	// Parse input to return a slice of IDRanges
 	IDRanges := make([]IDRange, 0)
 	for currentRange := range strings.SplitSeq(getInput("IDRanges.txt"), ",") {
 		lowerBound, _ := strconv.Atoi(strings.TrimSpace(strings.Split(currentRange, "-")[0]))
@@ -32,22 +35,8 @@ func parseInput() []IDRange {
 	return IDRanges
 }
 
-func isInvalidID(ID string) bool {
+func isInvalidIDP1(ID string) bool {
 	return ID[:len(ID)/2] == ID[len(ID)/2:]
-}
-
-func part1() {
-	invalidIDSum := 0
-	for _, currentRange := range parseInput() {
-		// Loop through each possible ID
-		for ID := currentRange.lowerBound; ID <= currentRange.upperBound; ID++ {
-			if isInvalidID(strconv.Itoa(ID)) {
-				invalidIDSum += ID
-			}
-		}
-	}
-
-	fmt.Printf("Sum of all invalid IDs: %d\n", invalidIDSum)
 }
 
 func isInvalidIDP2(ID string) bool {
@@ -70,18 +59,28 @@ func isInvalidIDP2(ID string) bool {
 	return false
 }
 
-func part2() {
+func getSumOfInvalidIds(isInvalid isInvalidFunction) int {
+	// Takes in an isInvalidFunction which specifies the method of determining the validity of an ID
+	// Returns the sum of all invalid IDs
 	invalidIDSum := 0
 	for _, currentRange := range parseInput() {
 		// Loop through each possible ID
 		for ID := currentRange.lowerBound; ID <= currentRange.upperBound; ID++ {
-			if isInvalidIDP2(strconv.Itoa(ID)) {
+			if isInvalid(strconv.Itoa(ID)) {
 				invalidIDSum += ID
 			}
 		}
 	}
 
-	fmt.Printf("Sum of all invalid IDs: %d\n", invalidIDSum)
+	return invalidIDSum
+}
+
+func part1() {
+	fmt.Printf("Sum of all invalid IDs: %d\n", getSumOfInvalidIds(isInvalidIDP1))
+}
+
+func part2() {
+	fmt.Printf("Sum of all invalid IDs: %d\n", getSumOfInvalidIds(isInvalidIDP2))
 }
 
 func main() {
