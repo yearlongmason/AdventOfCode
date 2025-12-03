@@ -42,7 +42,7 @@ func isInvalidIDP1(ID string) bool {
 func isInvalidIDP2(ID string) bool {
 	// Original regular expression: `\b(\d+)\1{1,len(ID)}\b`
 	// Unfortunately Go uses the RE2 regular expression engine which does not support backreferences (\1)
-	for chunkSize := 1; chunkSize < len(ID); chunkSize++ {
+	for chunkSize := 1; chunkSize <= len(ID)/2; chunkSize++ {
 		// Make sure the ID is actually divisible by the chunk size
 		if len(ID)%chunkSize != 0 {
 			continue
